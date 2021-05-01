@@ -53,18 +53,18 @@ static void do_read(){
 
  static void do_status_update(){
     if(hb_sd_regs.reset){
-        int fd = fs_open(dram_fn,3);
-        if(fd<0){
-            fd = fs_create(dram_fn,3);
-        }
-        if(fd>=0){
-            uint32_t dram_params[2];
-            dram_params[0] = hb_sd_regs.dram_save;
-            dram_params[1] = hb_sd_regs.dram_save_len;
-            fs_write(fd,dram_params,sizeof(dram_params));
-            fs_write(fd,(char*)n64_dram + dram_params[0],dram_params[1]);
-            fs_close(fd);
-        }
+        //int fd = fs_open(dram_fn,3);
+        //if(fd<0){
+        //    fd = fs_create(dram_fn,3);
+        //}
+        //if(fd>=0){
+        //    uint32_t dram_params[2];
+        //    dram_params[0] = hb_sd_regs.dram_save;
+        //    dram_params[1] = hb_sd_regs.dram_save_len;
+        //    fs_write(fd,dram_params,sizeof(dram_params));
+        //    fs_write(fd,(char*)n64_dram + dram_params[0],dram_params[1]);
+        //    fs_close(fd);
+        //}
         
         reset_flag = 1;
         
@@ -170,15 +170,15 @@ ENTRY bool _start(void **dest, size_t size){
     sprintf(dram_fn,"/title/00010001/%8x/data/dram_save",title_id);
     
     // Check if a dram restore needs to be done. 
-    int fd = fs_open(dram_fn,1);
-    if(fd>=0){
-        uint32_t dram_params[2];
-        fs_read(fd,dram_params,sizeof(dram_params));
-        fs_read(fd,(char*)n64_dram + dram_params[0], dram_params[1]);
-        fs_close(fd);
-        fs_delete(dram_fn);
-        hb_sd_regs.dram_restore_key = 0x6864;
-    }
+    //int fd = fs_open(dram_fn,1);
+    //if(fd>=0){
+    //    uint32_t dram_params[2];
+    //    fs_read(fd,dram_params,sizeof(dram_params));
+    //    fs_read(fd,(char*)n64_dram + dram_params[0], dram_params[1]);
+    //    fs_close(fd);
+    //    fs_delete(dram_fn);
+    //    hb_sd_regs.dram_restore_key = 0x6864;
+    //}
 
     return ret;
 }
